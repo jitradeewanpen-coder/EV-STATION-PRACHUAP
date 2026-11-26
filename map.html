@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV STATION PRACHUAP - แผนที่</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f5ef;
+            color: #123d30;
+        }
+
+        header {
+            background: #123d30;
+            color: white;
+            padding: 22px 6%;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            color: #123d30;
+        }
+
+        #map {
+            width: 100%;
+            height: 550px;
+            min-height: 550px;
+            display: block;
+            background: #e8eee8;
+            border: 2px solid #123d30;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        #status {
+            padding: 12px;
+            color: #a33;
+        }
+
+        footer {
+            background: #123d30;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+    </style>
+
+    <!-- Leaflet CSS จาก jsDelivr -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+        onerror="this.onerror=null;this.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';"
+    >
+</head>
+
+<body>
+
+<header>
+    <h2>EV STATION PRACHUAP.</h2>
+
+    <nav>
+        <a href="index.html">หน้าแรก</a>
+        <a href="station.html">สถานีชาร์จ</a>
+        <a href="map.html">แผนที่</a>
+        <a href="suggest.html">เสนอแนะ</a>
+        <a href="contact.html">เกี่ยวกับเรา</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h1>แผนที่สถานีชาร์จรถยนต์ไฟฟ้า</h1>
+    <p>อำเภอเมืองประจวบคีรีขันธ์</p>
+
+    <div id="map"></div>
+
+    <p id="status">กำลังโหลดระบบแผนที่...</p>
+
+</div>
+
+<footer>
+    © EV STATION PRACHUAP
+</footer>
+
+<script>
+function loadLeaflet(url, fallback) {
+
+    const script = document.createElement("script");
+
+    script.src = url;
+
+    script.onload = function() {
+        startMap();
+    };
+
+    script.onerror = function() {
+        if (fallback) {
+            loadLeaflet(fallback, null);
+        } else {
+            document.getElementById("status").textContent =
+                "โหลด Leaflet ไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตหรือการบล็อก CDN";
+        }
+    };
+
+    document.head.appendChild(script);
+}
+
+function startMap() {
+
+    const status = document.getElementById("status");
+
+    if (typeof L === "undefined") {
+        status.textContent = "ไม่พบระบบ Leaflet";
+        return;
+    }
+
+    // สร้างแผนที่
+    const map = L.map("map").setView(
+        [11.80075, 99.77671], 14
+    );
+
+    // โหลดแผนที่พื้นหลัง
+    const tiles = L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+        {
+            attribution: "&copy; OpenStreetMap contributors &copy; CARTO",
+            subdomains: "abcd",
+            maxZoom: 20
+        }
+    );
+
+    tiles.addTo(map);
+
+    tiles.on("tileload", function() {
+        status.textContent = "ระบบแผนที่พร้อมใช้งาน";
+        status.style.color = "#16804d";
+    });
+
+    tiles.on("tileerror", function() {
+        status.textContent =
+            "ระบบแผนที่ทำงานแล้ว แต่โหลดภาพแผนที่ไม่สำเร็จ";
+        status.style.color = "#a33";
+    });
+
+    // ข้อมูลสถานีตัวอย่าง
+    const stations = [
+        {
+            name: "PEA VOLTA เมืองประจวบฯ",
+            lat: 11.80075,
+            lng: 99.77671
+        },
+        {
+            name: "V Charge EV HUB เมืองประจวบฯ",
+            lat: 11.80075,
+            lng: 99.77671
+        },
+        {
+            name: "Altervim (โลตัส ประจวบฯ)",
+            lat: 11.79760,
+            lng: 99.77733
+        },
+        {
+            name: "MG Super Charge (สุขจิต ซอย 12)",
+            lat: 11.80020,
+            lng: 99.79222
+        },
+        {
+            name: "MG Super Charge (ถ.เพชรเกษม)",
+            lat: 11.80200,
+            lng: 99.78900
+        }
+    ];
+
+    stations.forEach(function(station) {
+
+        L.marker([station.lat, station.lng])
+            .addTo(map)
+            .bindPopup("<b>" + station.name + "</b>");
+
+    });
+
+    setTimeout(function() {
+        map.invalidateSize();
+    }, 500);
+}
+
+// ทดลองโหลด jsDelivr ก่อน หากไม่สำเร็จจะใช้ unpkg
+loadLeaflet(
+    "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js",
+    "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+);
+</script>
+
+</body>
+</html>

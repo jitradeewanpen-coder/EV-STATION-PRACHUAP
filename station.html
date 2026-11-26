@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สถานีชาร์จ | EV STATION PRACHUAP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <a class="logo" href="index.html">EV STATION <span>PRACHUAP.</span></a>
+    <nav>
+        <a href="index.html">หน้าแรก</a>
+        <a class="active" href="station.html">สถานีชาร์จ</a>
+        <a href="map.html">แผนที่</a>
+        <a href="suggest.html">เสนอแนะ</a>
+        <a href="contact.html">เกี่ยวกับเรา</a>
+    </nav>
+</header>
+
+<section class="page-banner">
+    <div class="container">
+        <div class="eyebrow">CHARGING LOCATIONS</div>
+        <h1>สถานีชาร์จรถยนต์ไฟฟ้า</h1>
+        <p>รวบรวมข้อมูลสถานีชาร์จในอำเภอเมืองประจวบคีรีขันธ์</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="section-heading">
+            <h2>ค้นหาสถานีชาร์จ</h2>
+            <p>เลือกดูรายละเอียดสถานีที่ต้องการ</p>
+        </div>
+
+        <input
+            type="text"
+            id="stationSearch"
+            class="search-box"
+            placeholder="ค้นหาชื่อสถานี..."
+        >
+
+        <div class="grid" id="stationList">
+
+            <div class="card station-card">
+                <div class="eyebrow">STATION 01</div>
+                <h3>PEA VOLTA เมืองประจวบฯ</h3>
+                <p class="address">51/8 ถ.เกาะหลัก ต.เกาะหลัก</p>
+                <p>มีหลายหัวชาร์จ จ่ายไฟเต็มกำลังแม้ชาร์จพร้อมกัน มีห้องน้ำและร้านอาหารใกล้เคียง</p>
+                <div class="rating">★ 4.9/5 (44 รีวิว)</div>
+                <a class="btn" target="_blank"
+                   href="https://www.google.com/search?kgmid=%2Fg%2F11x312d4kb">ดูข้อมูลสถานี</a>
+            </div>
+
+            <div class="card station-card">
+                <div class="eyebrow">STATION 02</div>
+                <h3>V Charge EV HUB เมืองประจวบฯ</h3>
+                <p class="address">51/8 ถ.เพชรเกษม ต.เกาะหลัก</p>
+                <p>ใช้งานผ่านแอป EleXa ชาร์จไว มีหัวชาร์จหลายหัว มีที่จอดรถและห้องน้ำ</p>
+                <div class="rating">★ 5.0/5 (4 รีวิว)</div>
+                <a class="btn" target="_blank"
+                   href="https://www.google.com/search?q=V+Charge+EV+HUB+Prachuap">ดูข้อมูลสถานี</a>
+            </div>
+
+            <div class="card station-card">
+                <div class="eyebrow">STATION 03</div>
+                <h3>Altervim (โลตัส ประจวบฯ)</h3>
+                <p class="address">51/12 ถ.เพชรเกษม ต.เกาะหลัก</p>
+                <p>อยู่ในห้างโลตัส จ่ายไฟเต็มกำลังรับเข้าของรถ รองรับการจ่ายผ่าน NFC และมีห้องน้ำ</p>
+                <div class="rating">★ 5.0/5 (5 รีวิว)</div>
+                <a class="btn" target="_blank"
+                   href="https://www.google.com/search?kgmid=%2Fg%2F11lc9z0w7y">ดูข้อมูลสถานี</a>
+            </div>
+
+            <div class="card station-card">
+                <div class="eyebrow">STATION 04</div>
+                <h3>MG Super Charge (สุขจิต ซอย 12)</h3>
+                <p class="address">บ้านหนองบัว 17 สุขจิต ซอย 12 ต.ประจวบฯ</p>
+                <p>สถานที่สะอาด มีห้องนั่งรอสำหรับลูกค้าและของว่างให้บริการ</p>
+                <div class="rating">★ 5.0/5 (4 รีวิว)</div>
+                <a class="btn" target="_blank"
+                   href="https://www.google.com/search?kgmid=%2Fg%2F11tp77xdwm">ดูข้อมูลสถานี</a>
+            </div>
+
+            <div class="card station-card">
+                <div class="eyebrow">STATION 05</div>
+                <h3>MG Super Charge (ถ.เพชรเกษม)</h3>
+                <p class="address">บริเวณ Hotel บ้านหนองบัว ถ.เพชรเกษม ต.เกาะหลัก</p>
+                <p>จุดชาร์จริมถนนเพชรเกษม รองรับการชำระเงินผ่าน NFC</p>
+                <div class="rating">★ 2.3/5 (3 รีวิว)</div>
+                <a class="btn" target="_blank"
+                   href="https://www.google.com/search?q=MG+Super+Charge+Hotel+Ban+Nong+Bua+Prachuap">ดูข้อมูลสถานี</a>
+            </div>
+
+        </div>
+
+        <p id="noResult" class="empty-message">ไม่พบสถานีที่ค้นหา</p>
+
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <strong>EV STATION PRACHUAP.</strong>
+        <p>© 2026 EV STATION PRACHUAP</p>
+    </div>
+</footer>
+
+<script>
+const search = document.getElementById("stationSearch");
+const cards = document.querySelectorAll(".station-card");
+const noResult = document.getElementById("noResult");
+
+search.addEventListener("input", function () {
+    const keyword = this.value.toLowerCase();
+    let count = 0;
+
+    cards.forEach(card => {
+        const match = card.textContent.toLowerCase().includes(keyword);
+        card.style.display = match ? "flex" : "none";
+        if (match) count++;
+    });
+
+    noResult.style.display = count === 0 ? "block" : "none";
+});
+</script>
+
+</body>
+</html>
